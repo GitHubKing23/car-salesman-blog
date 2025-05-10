@@ -1,0 +1,44 @@
+.blog-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adds space between the blog posts */
+  margin-top: 2rem;
+}
+
+.blog-post {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounds the corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  margin: 10px;
+  padding: 20px;
+  width: 300px;
+  transition: transform 0.2s; /* Smooth hover animation */
+}
+
+.blog-post:hover {
+  transform: translateY(-5px); /* Slightly lifts the post on hover */
+}
+
+.blog-post h3 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.blog-post p {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.blog-post a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.blog-post a:hover {
+  text-decoration: underline;
+}

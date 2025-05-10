@@ -1,0 +1,26 @@
+/* src/components/SinglePost.css */
+.single-post {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.single-post h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.post-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.post-content a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}

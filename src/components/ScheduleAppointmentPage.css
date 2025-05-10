@@ -1,0 +1,28 @@
+.schedule-appointment-page {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .schedule-appointment-page h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .schedule-appointment-page p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .calendly-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
