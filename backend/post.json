@@ -1,0 +1,24 @@
+{
+    "title": "Test Drive Tips",
+    "excerpt": "5 insider tips to ace your next test drive.",
+    "sections": [
+      {
+        "heading": "Know Your Route",
+        "body": "Plan a loop that has hills, straights and tight turns.",
+        "images": [],
+        "embeds": []
+      },
+      {
+        "heading": "Listen to the Engine",
+        "body": "Roll down the windows and pay attention to engine noise.",
+        "images": [],
+        "embeds": [
+          {
+            "type": "youtube",
+            "url": "https://www.youtube.com/watch?v=VIDEO_ID"
+          }
+        ]
+      }
+    ]
+  }
+  
