@@ -1,6 +1,7 @@
 .header {
-  background-color: #333;
+  background: linear-gradient(90deg, #333, #555);
   padding: 15px 20px; /* Adjust padding for a better look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
@@ -12,6 +13,7 @@
 .navbar-brand a {
   color: white;
   font-size: 1.5rem;
+  font-weight: bold;
   text-decoration: none;
 }
 
