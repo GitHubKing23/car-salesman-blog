@@ -1,86 +1,99 @@
 import React, { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore'; // Import Firestore methods
-import { db } from '../firebase'; // Import the Firestore database instance from firebase.js
-import './AppointmentForm.css'; // Import your CSS for styling
+import './AppointmentForm.css';
 
 const AppointmentForm = () => {
-  // State variables to hold form data
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    appointment: '',
+    autoBook: false
+  });
   const [message, setMessage] = useState('');
-  const [success, setSuccess] = useState(false); // New state for success confirmation
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Handle form submission
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the page from refreshing
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
 
-    const appointmentData = {
-      name,
-      email,
-      date,
-      time,
-      createdAt: new Date(), // Add a timestamp
+    // Construct payload
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      city: formData.city,
+      autoBook: formData.autoBook,
+      appointment: formData.autoBook ? undefined : formData.appointment
     };
 
     try {
-      await addDoc(collection(db, 'appointments'), appointmentData);
-      setMessage('Appointment scheduled successfully!');
-      setSuccess(true); // Set success to true if the submission is successful
-      
-      // Clear form fields after successful submission
-      setName('');
-      setEmail('');
-      setDate('');
-      setTime('');
-    } catch (error) {
-      console.error('Error adding document: ', error);
-      setMessage('Error scheduling the appointment. Please try again.');
-      setSuccess(false); // Set success to false if there is an error
+      const res = await fetch(`${process.env.REACT_APP_API_BASE}/api/forms`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Submission failed');
+
+      setSuccess(true);
+      setMessage('Your appointment request has been received!');
+      setFormData({ name: '', email: '', phone: '', city: '', appointment: '', autoBook: false });
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setSuccess(false);
+      setMessage(err.message || 'Error scheduling appointment.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="appointment-form">
       <h2>Schedule an Appointment</h2>
-      {success ? ( // If the form submission is successful, show a confirmation message
+      {success ? (
         <div className="confirmation">
           <p>{message}</p>
-          <button onClick={() => setSuccess(false)}>Schedule Another Appointment</button>
+          <button onClick={() => setSuccess(false)}>Book Another</button>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
-          <button type="submit">Book Appointment</button>
+          <input name="name" type="text" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
+          <input name="email" type="email" placeholder="Your Email" value={formData.email} onChange={handleChange} required />
+          <input name="phone" type="tel" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required />
+          <input name="city" type="text" placeholder="City" value={formData.city} onChange={handleChange} required />
+
+          <label>
+            <input name="autoBook" type="checkbox" checked={formData.autoBook} onChange={handleChange} />
+            Automatically schedule next available slot
+          </label>
+
+          {!formData.autoBook && (
+            <input
+              name="appointment"
+              type="datetime-local"
+              value={formData.appointment}
+              onChange={handleChange}
+              required
+            />
+          )}
+
+          <button type="submit" disabled={loading}>
+            {loading ? 'Submitting...' : 'Book Appointment'}
+          </button>
+          {message && !success && <p className="error">{message}</p>}
         </form>
       )}
-      {message && !success && <p>{message}</p>} {/* Display error message if any */}
     </div>
   );
 };
