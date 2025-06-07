@@ -8,6 +8,8 @@ import ScheduleAppointmentPage from './components/ScheduleAppointmentPage';
 import HomePage from './components/HomePage';
 import FormComponent from './components/FormComponent';
 import BlogListComponent from './components/BlogListComponent';
+import CarMarketplace from './components/CarMarketplace';
+import CarForm from './components/CarForm';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import './styles/main.css';
@@ -36,6 +38,8 @@ function App() {
           <Route path="/post/:id" element={<SinglePost />} />
           <Route path="/schedule" element={<ScheduleAppointmentPage />} />
           <Route path="/pre-approval" element={<FormComponent />} /> {/* New Form Route */}
+          <Route path="/marketplace" element={<CarMarketplace />} />
+          <Route path="/admin/cars" element={<CarForm />} />
         </Routes>
 
         <footer>

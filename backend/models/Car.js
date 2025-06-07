@@ -17,6 +17,10 @@ function generateStockNumber() {
   return Math.random().toString(36).substr(2, 8).toUpperCase();
 }
 
+function pictureLimit(val) {
+  return val.length <= 4;
+}
+
 const carSchema = new mongoose.Schema({
   make: {
     type: String,
@@ -50,6 +54,7 @@ const carSchema = new mongoose.Schema({
   },
   pictures: {
     type: [pictureSchema],   // array of image objects with URL and optional caption
+    validate: [pictureLimit, 'A car listing can have up to 4 pictures'],
     default: []
   },
   isFeatured: {

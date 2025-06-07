@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Car Marketplace
+
+This project now includes a simple car marketplace available at `/marketplace`.
+Admins can manage car listings via `/admin/cars`. The admin form collects the
+make, model, year, price and description along with up to four image URLs.
+Every listing displays a "Purchase on Facebook" button that links customers to
+our Facebook group for buying.

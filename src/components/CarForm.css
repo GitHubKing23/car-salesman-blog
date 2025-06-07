@@ -1,0 +1,19 @@
+/* src/components/CarForm.css */
+.car-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.car-form input,
+.car-form textarea {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.pic-input {
+  display: flex;
+  gap: 5px;
+}

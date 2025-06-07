@@ -1,0 +1,34 @@
+/* src/components/CarCard.css */
+.car-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.car-card .images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.car-card .images img {
+  width: 100px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.car-card .price {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.car-card .buy-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
+  background-color: #007bff;
+  padding: 8px 12px;
+  text-decoration: none;
+}
